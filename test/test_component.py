@@ -3,8 +3,8 @@ from pyhome_server.components.component import Component
 import unittest
 import mock
 
-class ComponentTestCase(unittest.TestCase):
 
+class ComponentTestCase(unittest.TestCase):
     def setUp(self):
         self.test_pin_info = {'a': 1, 'b': 3, 'c': 37, 'f': 'another property'}
 
@@ -26,9 +26,8 @@ class ComponentTestCase(unittest.TestCase):
         with self.assertRaises(AttributeError):
             instance.e
 
-    # Needs to be run on the raspberry pi to work
-    # @mock.patch('RPi.GPIO')
-    # def test_pin_numbering_is_set_to_bcm(self, MockGPIO):
-    #     """Test that the gpios are set for BCM numbering"""
-    #     Component()
-    #     MockGPIO.setmode.assert_called_once_with(MockGPIO.BCM)
+    @mock.patch('RPi.GPIO')
+    def test_pin_numbering_is_set_to_bcm(self, MockGPIO):
+        """Test that the gpios are set for BCM numbering"""
+        Component()
+        MockGPIO.setmode.assert_called_once_with(MockGPIO.BCM)
